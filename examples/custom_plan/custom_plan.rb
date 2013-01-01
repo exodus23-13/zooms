@@ -1,11 +1,11 @@
-require 'zeus/rails'
+require 'zooms/rails'
 
-class CustomPlan < Zeus::Rails
+class CustomPlan < Zooms::Rails
 
   # def my_custom_command
-  #  # see https://github.com/burke/zeus/blob/master/docs/ruby/modifying.md
+  #  # see https://github.com/exodus23-13/zooms/blob/master/docs/ruby/modifying.md
   # end
 
 end
 
-Zeus.plan = CustomPlan.new
+Zooms.plan = CustomPlan.new

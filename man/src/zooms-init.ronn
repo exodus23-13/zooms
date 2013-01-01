@@ -1,0 +1,10 @@
+zooms-init(1) -- Generate a template zooms.json
+=============================================
+
+## SYNOPSIS
+
+`zooms init`
+
+## DESCRIPTION
+
+Creates a `zooms.json` file in the current directory. This example file is useful for rails applications, but can be modified to suit your needs.

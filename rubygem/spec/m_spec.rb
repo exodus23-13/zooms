@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'fake_mini_test'
 
-describe Zeus::M::Runner do
-  Runner = Zeus::M::Runner
+describe Zooms::M::Runner do
+  Runner = Zooms::M::Runner
 
   before do
     stub_mini_test_methods

@@ -1,6 +1,6 @@
-require 'zeus/rails'
+require 'zooms/rails'
 
-module Zeus::M
+module Zooms::M
   VERSION = "0.0.0.test"
 end
 

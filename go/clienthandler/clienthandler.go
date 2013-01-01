@@ -9,19 +9,19 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/burke/zeus/go/messages"
-	"github.com/burke/zeus/go/processtree"
-	slog "github.com/burke/zeus/go/shinylog"
-	"github.com/burke/zeus/go/unixsocket"
-	"github.com/burke/zeus/go/zerror"
+	"github.com/exodus23-13/zooms/go/messages"
+	"github.com/exodus23-13/zooms/go/processtree"
+	slog "github.com/exodus23-13/zooms/go/shinylog"
+	"github.com/exodus23-13/zooms/go/unixsocket"
+	"github.com/exodus23-13/zooms/go/zerror"
 )
 
-const zeusSockName string = ".zeus.sock"
+const zoomsSockName string = ".zooms.sock"
 
 func Start(tree *processtree.ProcessTree, done chan bool) chan bool {
 	quit := make(chan bool)
 	go func() {
-		path, _ := filepath.Abs(zeusSockName)
+		path, _ := filepath.Abs(zoomsSockName)
 		addr, err := net.ResolveUnixAddr("unix", path)
 		if err != nil {
 			zerror.Error("Can't open socket.")

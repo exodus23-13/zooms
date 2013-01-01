@@ -2,9 +2,9 @@
 
 #### 1. Socket
 
-The Slave is always started with an environment variable named `ZEUS_MASTER_FD`. The file descriptor at the given integer value is a socket to the Master process.
+The Slave is always started with an environment variable named `ZOOMS_MASTER_FD`. The file descriptor at the given integer value is a socket to the Master process.
 
-The Slave should open a UNIX Domain Socket using the `ZEUS_MASTER_FD` File Descriptor (`globalMasterSock`).
+The Slave should open a UNIX Domain Socket using the `ZOOMS_MASTER_FD` File Descriptor (`globalMasterSock`).
 
 The Slave opens a new UNIX datagram Socketpair (`local`, `remote`)
 

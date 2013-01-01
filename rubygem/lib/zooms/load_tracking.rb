@@ -1,4 +1,4 @@
-module Zeus
+module Zooms
   class LoadTracking
     class << self
 
@@ -44,10 +44,10 @@ module Kernel
   end
 
   class << self
-    alias_method :__load_without_zeus, :load
+    alias_method :__load_without_zooms, :load
     def load(file, *a)
-      Zeus::LoadTracking.add_feature(file)
-      __load_without_zeus(file, *a)
+      Zooms::LoadTracking.add_feature(file)
+      __load_without_zooms(file, *a)
     end
   end
 end
@@ -55,10 +55,10 @@ end
 require 'yaml'
 module YAML
   class << self
-    alias_method :__load_file_without_zeus, :load_file
+    alias_method :__load_file_without_zooms, :load_file
     def load_file(file, *a)
-      Zeus::LoadTracking.add_feature(file)
-      __load_file_without_zeus(file, *a)
+      Zooms::LoadTracking.add_feature(file)
+      __load_file_without_zooms(file, *a)
     end
   end
 end

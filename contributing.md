@@ -17,9 +17,9 @@ One or two sentences giving an overview of the issue.
 
 ## Steps to Reproduce
 
-1) `zeus start` in a new rails project
+1) `zooms start` in a new rails project
 
-2) `zeus ponies`
+2) `zooms ponies`
 
 ## Observed Behavior
 
@@ -30,7 +30,7 @@ One or two sentences giving an overview of the issue.
 * Ponies survive
 ```
 
-# Hacking on Zeus
+# Hacking on Zooms
 
 ## Step 1: Prerequisites
 
@@ -38,21 +38,21 @@ You'll need ruby 1.9+ installed, and the `ronn` gem is required to build manpage
 
 You will also need a working Go toolchain. You can get one from http://golang.org/doc/install.
 
-To be able to fully-build Zeus, you will also need to install a couple additional Go runtimes. See http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go. Zeus currently builds for darwin/amd64, linux/amd64, and linux/386.
+To be able to fully-build Zooms, you will also need to install a couple additional Go runtimes. See http://dave.cheney.net/2012/09/08/an-introduction-to-cross-compilation-with-go. Zooms currently builds for darwin/amd64, linux/amd64, and linux/386.
 
 ## Step 2: Paths, etc.
 
-You should check out this repository into `$GOPATH/src/github.com/burke/zeus`. Often `$GOPATH` will be set to `~/go`, but this is configurable. If you've just installed Go, you'll have to set this up yourself in your shell config. The Go site [has documentation on this](http://golang.org/doc/code.html).
+You should check out this repository into `$GOPATH/src/github.com/exodus23-13/zooms`. Often `$GOPATH` will be set to `~/go`, but this is configurable. If you've just installed Go, you'll have to set this up yourself in your shell config. The Go site [has documentation on this](http://golang.org/doc/code.html).
 
 ## Step 3: Dependencies
 
-cd into the zeus project directory and run `./dev-bootstrap.sh`. This will fetch and compile a couple libraries zeus uses for terminal interaction and such.
+cd into the zooms project directory and run `./dev-bootstrap.sh`. This will fetch and compile a couple libraries zooms uses for terminal interaction and such.
 
 ## Step 4: Building
 
-### Context: How zeus is structured
+### Context: How zooms is structured
 
-The core of zeus is a single go program that acts as the coordinating process (master, e.g. `zeus start`), or the client (called per-command, e.g. `zeus client`). This code is cross-compiled for a handful of different architectures and bundled with a ruby gem. The ruby gem contains all the shim code necessary to boot a rails app under the control of the master process.
+The core of zooms is a single go program that acts as the coordinating process (master, e.g. `zooms start`), or the client (called per-command, e.g. `zooms client`). This code is cross-compiled for a handful of different architectures and bundled with a ruby gem. The ruby gem contains all the shim code necessary to boot a rails app under the control of the master process.
 
 ### Building
 

@@ -1,0 +1,16 @@
+platform = `uname -sm`
+
+exe = case platform
+      when /^Darwin/    ; "zooms-darwin-amd64"
+      when /^Linux.*64/ ; "zooms-linux-amd64"
+      when /^Linux.*/   ; "zooms-linux-386"
+      else
+        puts "Zooms is not supported on your platform."
+        puts "It's not likely to ever be possible on Windows."
+        puts "If you're using another platform that you think should work easily, open an issue at:"
+        puts "https://github.com/exodus23-13/zooms/issues"
+        exit 1
+      end
+
+zoomsgemdir = File.expand_path("../../", __FILE__)
+exec "#{zoomsgemdir}/build/#{exe}", *ARGV

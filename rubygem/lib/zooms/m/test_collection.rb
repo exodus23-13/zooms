@@ -1,6 +1,6 @@
 require "forwardable"
 
-module Zeus
+module Zooms
   module M
     ### Custom wrapper around an array of test methods
     # In charge of some smart querying, filtering, sorting, etc on the the

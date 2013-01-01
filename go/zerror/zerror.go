@@ -5,7 +5,7 @@ import (
 	"os"
 	"syscall"
 
-	slog "github.com/burke/zeus/go/shinylog"
+	slog "github.com/exodus23-13/zooms/go/shinylog"
 )
 
 var finalOutput []func()
@@ -34,12 +34,12 @@ func Error(msg string) {
 }
 
 func ErrorCantConnectToMaster() {
-	slog.Red("Can't connect to master. Run {yellow}zeus start{red} first.\r")
+	slog.Red("Can't connect to master. Run {yellow}zooms start{red} first.\r")
 }
 
 func ErrorConfigCommandCouldntStart(msg, output string) {
 	ExitNow(1, func() {
-		slog.Red("Failed to initialize application from {yellow}zeus.json{red}.")
+		slog.Red("Failed to initialize application from {yellow}zooms.json{red}.")
 		slog.Red("The json file is valid, but the {yellow}command{red} could not be started:\n\x1b[0m" + output)
 	})
 }
@@ -55,20 +55,20 @@ func ErrorConfigCommandCrashed(output string) {
 // and our exitNow goroutine has not been spawned yet, so we will just explicitly exit
 // in the json-related errors..
 func ErrorConfigFileInvalidJson() {
-	if slog.Red("The config file {yellow}zeus.json{red} contains invalid JSON and could not be parsed.") {
+	if slog.Red("The config file {yellow}zooms.json{red} contains invalid JSON and could not be parsed.") {
 		os.Exit(1)
 	}
 }
 
 func ErrorConfigFileInvalidFormat() {
-	if slog.Red("The config file {yellow}zeus.json{red} is not in the correct format.") {
+	if slog.Red("The config file {yellow}zooms.json{red} is not in the correct format.") {
 		os.Exit(1)
 	}
 }
 
 func ErrorCantCreateListener() {
 	ExitNow(1, func() {
-		slog.Red("It looks like Zeus is already running. If not, remove {yellow}.zeus.sock{red} and try again.")
+		slog.Red("It looks like Zooms is already running. If not, remove {yellow}.zooms.sock{red} and try again.")
 	})
 }
 

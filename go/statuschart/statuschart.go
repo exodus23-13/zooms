@@ -3,13 +3,13 @@ package statuschart
 import (
 	"fmt"
 	"github.com/burke/ttyutils"
-	slog "github.com/burke/zeus/go/shinylog"
+	slog "github.com/exodus23-13/zooms/go/shinylog"
 	"os"
 	"strings"
 	"sync"
 	"time"
 
-	"github.com/burke/zeus/go/processtree"
+	"github.com/exodus23-13/zooms/go/processtree"
 )
 
 const (
@@ -158,7 +158,7 @@ func (s *StatusChart) drawCommands() {
 		if len(alia) > 0 {
 			aliasPart = " (alias: " + alia + ")"
 		}
-		text := "zeus " + command.Name + aliasPart
+		text := "zooms " + command.Name + aliasPart
 		reset := "\033[K"
 
 		log := theChart.directLogger

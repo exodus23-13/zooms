@@ -7,18 +7,18 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/burke/zeus/go/config"
-	slog "github.com/burke/zeus/go/shinylog"
-	"github.com/burke/zeus/go/zeusclient"
-	"github.com/burke/zeus/go/zeusmaster"
-	"github.com/burke/zeus/go/zeusversion"
+	"github.com/exodus23-13/zooms/go/config"
+	slog "github.com/exodus23-13/zooms/go/shinylog"
+	"github.com/exodus23-13/zooms/go/zoomsclient"
+	"github.com/exodus23-13/zooms/go/zoomsmaster"
+	"github.com/exodus23-13/zooms/go/zoomsversion"
 )
 
 var color bool = true
 
 func main() {
 	if len(os.Args) == 1 {
-		execManPage("zeus")
+		execManPage("zooms")
 	}
 
 	var args []string
@@ -31,22 +31,22 @@ func main() {
 	}
 
 	if generalHelpRequested(args) {
-		execManPage("zeus")
+		execManPage("zooms")
 	} else if args[0] == "help" {
 		commandSpecificHelp(args)
 	} else if args[0] == "version" || args[0] == "--version" {
-		println("Zeus version " + zeusversion.VERSION)
+		println("Zooms version " + zoomsversion.VERSION)
 	} else if args[0] == "start" {
-		zeusmaster.Run()
+		zoomsmaster.Run()
 	} else if args[0] == "init" {
-		zeusInit()
+		zoomsInit()
 	} else if args[0] == "commands" {
-		zeusCommands()
+		zoomsCommands()
 	} else {
 		tree := config.BuildProcessTree()
 		for _, name := range tree.AllCommandsAndAliases() {
 			if args[0] == name {
-				zeusclient.Run()
+				zoomsclient.Run()
 				return
 			}
 		}
@@ -59,8 +59,8 @@ func execManPage(page string) {
 	binaryPath := os.Args[0]
 	gemDir := path.Dir(path.Dir(binaryPath))
 	manDir := path.Join(gemDir, "man/build")
-	zeus := path.Join(manDir, page)
-	syscall.Exec("/usr/bin/env", []string{"/usr/bin/env", "man", zeus}, os.Environ())
+	zooms := path.Join(manDir, page)
+	syscall.Exec("/usr/bin/env", []string{"/usr/bin/env", "man", zooms}, os.Environ())
 }
 
 func red() string {
@@ -103,16 +103,16 @@ func copyFile(from, to string) (err error) {
 	return nil
 }
 
-func zeusInit() {
+func zoomsInit() {
 	binaryPath := os.Args[0]
 	gemDir := path.Dir(path.Dir(binaryPath))
-	jsonPath := path.Join(gemDir, "examples/custom_plan/zeus.json")
+	jsonPath := path.Join(gemDir, "examples/custom_plan/zooms.json")
 	planPath := path.Join(gemDir, "examples/custom_plan/custom_plan.rb")
-	copyFile(jsonPath, "zeus.json")
+	copyFile(jsonPath, "zooms.json")
 	copyFile(planPath, "custom_plan.rb")
 }
 
-func zeusCommands() {
+func zoomsCommands() {
 	tree := config.BuildProcessTree()
 	for _, command := range tree.Commands {
 		alia := strings.Join(command.Aliases, ", ")
@@ -120,7 +120,7 @@ func zeusCommands() {
 		if len(alia) > 0 {
 			aliasPart = " (alias: " + alia + ")"
 		}
-		println("zeus " + command.Name + aliasPart)
+		println("zooms " + command.Name + aliasPart)
 	}
 }
 
@@ -130,9 +130,9 @@ func commandNotFound(command string) {
 
 func commandSpecificHelp(args []string) {
 	if args[1] == "start" {
-		execManPage("zeus-start")
+		execManPage("zooms-start")
 	} else if args[1] == "init" {
-		execManPage("zeus-init")
+		execManPage("zooms-init")
 	} else {
 		println(red() + "Command-level help is not yet fully implemented." + reset())
 	}

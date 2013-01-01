@@ -1,10 +1,10 @@
-# Zeus Overview
+# Zooms Overview
 
-Zeus is composed of three components:
+Zooms is composed of three components:
 
-1. [The Master Process](../go/zeusmaster). This is written in Go, and coordinates all the other processes. It connects Clients to Slaves and handles reloading when files change.
+1. [The Master Process](../go/zoomsmaster). This is written in Go, and coordinates all the other processes. It connects Clients to Slaves and handles reloading when files change.
 
-2. [Clients](../go/zeusclient). The Client is also written in Go. It sends a command to the Master, and has its streams wired up to a Command process, to make it appear to be running locally.
+2. [Clients](../go/zoomsclient). The Client is also written in Go. It sends a command to the Master, and has its streams wired up to a Command process, to make it appear to be running locally.
 
 3. [Slaves/Commands](../rubygem). These are the target application. A small shim, written in the target language, manages the communication between the application and the Master process, and boots the application in phases. Though the Master and Client are completely language-agnostic, currently ruby is the only language for which a Slave shim exists.
 
@@ -24,36 +24,36 @@ See: [`terminology.md`](terminology.md)
 
 4. SlaveMonitor
 
-![arch.png](//raw.github.com/burke/zeus/master/docs/arch.png)
+![arch.png](//raw.github.com/exodus23-13/zooms/master/docs/arch.png)
 
-The Master process revolves around the [`ProcessTree`](../go/zeusmaster/processtree.go) -- the core data structure that maintains most of the state of the application. Each module performs most of its communication with other modules through interactions with the Tree.
+The Master process revolves around the [`ProcessTree`](../go/zoomsmaster/processtree.go) -- the core data structure that maintains most of the state of the application. Each module performs most of its communication with other modules through interactions with the Tree.
 
 ### 1. Config
 
 This component reads the configuration file on initialization, and constructs the initial `ProcessTree` for the rest of the application to use.
 
-* [`config.go`](../go/zeusmaster/config.go)
-* [`zeus.json`](../examples/zeus.json)
+* [`config.go`](../go/zoomsmaster/config.go)
+* [`zooms.json`](../examples/zooms.json)
 
 ### 2. ClientHandler
 
 The `ClientHandler` listens on a socket for incoming requests from Client processes, and negotiates connections to running Slave processes. It is responsible for interactions with the client for its entire life-cycle.
 
-* [`clienthandler.go`](../go/zeusmaster/clienthandler.go)
+* [`clienthandler.go`](../go/zoomsmaster/clienthandler.go)
 
 ### 3. FileMonitor
 
 The `FileMonitor`'s job is to restart slaves when one of their dependencies has changed. Slaves are expected to report back with a list of files they have loaded. The `FileMonitor` listens for these messages and registers them with an external process that watches the filesystem for changes. When the external process reports a change, the `FileMonitor` restarts any slaves that have loaded that file.
 
-* [`filemonitor.go`](../go/zeusmaster/filemonitor.go)
+* [`filemonitor.go`](../go/zoomsmaster/filemonitor.go)
 * [`fsevents/main.m`](../ext/fsevents/main.m)
 
 ### 4. SlaveMonitor
 
 This component is responsible for communication with the target-language shim to manage booting and forking of application phase slaves. It constantly attempts to keep all slaves booted, restarting them when they are killed or die.
 
-* [`slavemonitor.go`](../go/zeusmaster/slavemonitor.go)
-* [`slavenode.go`](../go/zeusmaster/slavenode.go)
+* [`slavemonitor.go`](../go/zoomsmaster/slavemonitor.go)
+* [`slavenode.go`](../go/zoomsmaster/slavenode.go)
 * [`master_slave_handshake.md`](master_slave_handshake.md)
 
 ## Client Process
@@ -66,17 +66,17 @@ A handler is set up for SIGWINCH, again to forward it to the remote process, and
 
 When the remote process exits, it reports its exit status, which the client process then exits with.
 
-* [`zeusclient.go`](../go/zeusclient/zeusclient.go)
+* [`zoomsclient.go`](../go/zoomsclient/zoomsclient.go)
 * [`client_master_handshake.md`](client_master_handshake.md)
 
 ## Slave/Command Processes
 
 The Slave processes boot the actual application, and run commands. See [`master_slave_handshake.md`](master_slave_handshake.md), and the ruby implementation in the `rubygem` directory.
 
-* [`zeus.rb`](../rubygem/lib/zeus.rb)
-* [`zeus/rails.rb`](../rubygem/lib/zeus/rails.rb)
+* [`zooms.rb`](../rubygem/lib/zooms.rb)
+* [`zooms/rails.rb`](../rubygem/lib/zooms/rails.rb)
 
-## Contributing to Zeus
+## Contributing to Zooms
 
-See the handy contribution guide at [`docs/contributing.md`](/burke/zeus/tree/master/docs/contributing.md).
+See the handy contribution guide at [`docs/contributing.md`](/burke/zooms/tree/master/docs/contributing.md).
 

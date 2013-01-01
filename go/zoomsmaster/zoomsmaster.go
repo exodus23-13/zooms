@@ -1,17 +1,17 @@
-package zeusmaster
+package zoomsmaster
 
 import (
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/burke/zeus/go/clienthandler"
-	"github.com/burke/zeus/go/config"
-	"github.com/burke/zeus/go/filemonitor"
-	"github.com/burke/zeus/go/processtree"
-	slog "github.com/burke/zeus/go/shinylog"
-	"github.com/burke/zeus/go/statuschart"
-	"github.com/burke/zeus/go/zerror"
+	"github.com/exodus23-13/zooms/go/clienthandler"
+	"github.com/exodus23-13/zooms/go/config"
+	"github.com/exodus23-13/zooms/go/filemonitor"
+	"github.com/exodus23-13/zooms/go/processtree"
+	slog "github.com/exodus23-13/zooms/go/shinylog"
+	"github.com/exodus23-13/zooms/go/statuschart"
+	"github.com/exodus23-13/zooms/go/zerror"
 )
 
 // man signal | grep 'terminate process' | awk '{print $2}' | xargs -I '{}' echo -n "syscall.{}, "

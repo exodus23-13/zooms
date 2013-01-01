@@ -1,0 +1,61 @@
+zooms(1) -- boot rails in under a second
+=======================================================
+
+## SYNOPSIS
+
+`zooms` [--no-color] COMMAND [ARGS]
+
+## DESCRIPTION
+
+Zooms makes working with large codebases much less painful.
+
+To use Zooms with Ruby on Rails 3.0+, Just run `zooms start` in your 
+project directory. It will output a list of available commands, including
+tasks to spawn consoles, servers, tests, and rake tasks.
+
+See `https://github.com/exodus23-13/zooms/blob/master/docs/ruby/modifying.md`
+for information on modifying the boot process that Zooms uses by default
+and adding custom tasks.
+
+## SLIGHTLY MORE TECHNICAL DESCRIPTION
+
+Zooms is a language-agnostic application checkpointer for non-multithreaded applications.
+
+It is primarily targeted at ruby and other dynamic languages,
+where application boot time can be tens of seconds, but it can be
+made to work for nearly any language. However, zooms does not work
+well with multithreaded applications. It relies heavily on `fork(2)`,
+which is largely incompatible with multithreaded systems.
+
+Currently only ruby is targeted, but support for other languages is planned.
+
+Zooms lets you define common tasks, and preloads all of them in the
+background. When you ask to run them, zooms transparently connects
+your terminal to the already-running process in milliseconds.
+
+This lets you, for example, run unit tests in dozens of milliseconds,
+rather than dozens of seconds.
+
+Zooms also monitors all files loaded by your application, and restarts
+parts of it when dependencies change, to keep everything up-to-date.
+
+## WAY MORE TECHNICAL DESCRIPTION
+
+See `https://github.com/exodus23-13/zooms/blob/master/docs/overview.md`
+
+## OPTIONS
+
+* `--no-color`:
+  Prints all output without color
+
+## BUILTIN COMMANDS
+
+* [zooms start(1)][zooms-start]:
+  Start a zooms server in the current directory using `zooms.json`
+
+* [zooms init(1)][zooms-init]:
+  Generate a template zooms.json
+
+* `zooms commands(1)`:
+  List the commands defined by zooms.json
+

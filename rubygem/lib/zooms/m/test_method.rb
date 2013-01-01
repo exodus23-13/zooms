@@ -1,4 +1,4 @@
-module Zeus
+module Zooms
   module M
     ### Simple data structure for what a test method contains.
     #

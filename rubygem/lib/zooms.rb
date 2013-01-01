@@ -3,11 +3,11 @@ require 'socket'
 require 'json'
 require 'pty'
 
-require 'zeus/load_tracking'
-require 'zeus/plan'
-require 'zeus/version'
+require 'zooms/load_tracking'
+require 'zooms/plan'
+require 'zooms/version'
 
-module Zeus
+module Zooms
   class << self
     attr_accessor :plan, :dummy_tty, :master_socket
 
@@ -30,12 +30,12 @@ module Zeus
     def setup_master_socket!
       return master_socket if master_socket
 
-      fd = ENV['ZEUS_MASTER_FD'].to_i
+      fd = ENV['ZOOMS_MASTER_FD'].to_i
       self.master_socket = UNIXSocket.for_fd(fd)
     end
 
     def go(identifier=:boot)
-      $0 = "zeus slave: #{identifier}"
+      $0 = "zooms slave: #{identifier}"
 
       setup_dummy_tty!
       master = setup_master_socket!
@@ -50,7 +50,7 @@ module Zeus
       local.send_io(feature_pipe_r)
 
       # Now we run the action and report its success/fail status to the master.
-      features = Zeus::LoadTracking.features_loaded_by {
+      features = Zooms::LoadTracking.features_loaded_by {
         run_action(local, identifier)
       }
 
@@ -75,7 +75,7 @@ module Zeus
     private
 
     def command(identifier, sock)
-      $0 = "zeus runner: #{identifier}"
+      $0 = "zooms runner: #{identifier}"
       Process.setsid
 
       local, remote = UNIXSocket.pair(:DGRAM)
@@ -90,7 +90,7 @@ module Zeus
       arguments.chomp!("\0")
 
       pid = fork {
-        $0 = "zeus command: #{identifier}"
+        $0 = "zooms command: #{identifier}"
 
         plan.after_fork
         client_terminal = local.recv_io

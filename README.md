@@ -1,12 +1,12 @@
-# Zeus
+# Zooms
 
-Zeus preloads your Rails app so that your normal development tasks such as `console`, `server`, `generate`, and specs/tests take **less than one second**.
+Zooms preloads your Rails app so that your normal development tasks such as `console`, `server`, `generate`, and specs/tests take **less than one second**.
 
-This screencast gives a quick overview of how to use zeus with Rails.
+This screencast gives a quick overview of how to use zooms with Rails.
 
-[![Watch the screencast!](http://s3.amazonaws.com/burkelibbey/vimeo-zeus.png)](http://vimeo.com/burkelibbey/zeus)
+[![Watch the screencast!](http://s3.amazonaws.com/burkelibbey/vimeo-zooms.png)](http://vimeo.com/burkelibbey/zooms)
 
-More technically speaking, Zeus is a language-agnostic application checkpointer for non-multithreaded applications. Currently only ruby is targeted, but explicit support for other languages is on the horizon.
+More technically speaking, Zooms is a language-agnostic application checkpointer for non-multithreaded applications. Currently only ruby is targeted, but explicit support for other languages is on the horizon.
 
 ## Requirements (for use with Rails)
 
@@ -20,41 +20,41 @@ You can install the GC-patched ruby from [this gist for rbenv](https://gist.gith
 
 Install the gem.
 
-    gem install zeus
+    gem install zooms
 
 Q: "I should put it in my `Gemfile`, right?"
 
-A: No. You can, but running `bundle exec zeus` instead of `zeus` adds precious seconds to commands that otherwise would be quite a bit faster. Zeus was built to be run from outside of bundler.
+A: No. You can, but running `bundle exec zooms` instead of `zooms` adds precious seconds to commands that otherwise would be quite a bit faster. Zooms was built to be run from outside of bundler.
 
 ## Usage
 
 Start the server:
 
-    zeus start
+    zooms start
 
 The server will print a list of available commands.
 
 Run some commands in another shell:
 
-    zeus console
-    zeus server
-    zeus test test/unit/widget_test.rb
-    zeus test spec/widget_spec.rb
-    zeus generate model omg
-    zeus rake -T
-    zeus runner omg.rb
+    zooms console
+    zooms server
+    zooms test test/unit/widget_test.rb
+    zooms test spec/widget_spec.rb
+    zooms generate model omg
+    zooms rake -T
+    zooms runner omg.rb
 
 ## Hacking
 
-To add/modify commands, see [`docs/ruby/modifying.md`](/burke/zeus/tree/master/docs/ruby/modifying.md).
+To add/modify commands, see [`docs/ruby/modifying.md`](/burke/zooms/tree/master/docs/ruby/modifying.md).
 
-To get started hacking on Zeus itself, see [`docs/overview.md`](/burke/zeus/tree/master/docs/overview.md).
+To get started hacking on Zooms itself, see [`docs/overview.md`](/burke/zooms/tree/master/docs/overview.md).
 
-See also the handy contribution guide at [`contributing.md`](/burke/zeus/tree/master/contributing.md).
+See also the handy contribution guide at [`contributing.md`](/burke/zooms/tree/master/contributing.md).
 
 ## Alternative plans
 
-The default plan bundled with zeus only supports Rails 3.x. There is a project (currently WIP) to provide Rails 2.3 support at https://github.com/tyler-smith/zeus-rails23.
+The default plan bundled with zooms only supports Rails 3.x. There is a project (currently WIP) to provide Rails 2.3 support at https://github.com/tyler-smith/zooms-rails23.
 
 ---
 

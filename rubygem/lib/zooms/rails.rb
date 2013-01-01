@@ -3,7 +3,7 @@ ENV_PATH  = File.expand_path('config/environment',  ROOT_PATH)
 BOOT_PATH = File.expand_path('config/boot',  ROOT_PATH)
 APP_PATH  = File.expand_path('config/application',  ROOT_PATH)
 
-require 'zeus'
+require 'zooms'
 
 def gem_is_bundled?(gem)
   gemfile_lock_contents = File.read(ROOT_PATH + "/Gemfile.lock")
@@ -14,12 +14,12 @@ if version = gem_is_bundled?('method_source')
   gem 'method_source', version
 end
 
-require 'zeus/m'
+require 'zooms/m'
 
-module Zeus
+module Zooms
   class Rails < Plan
     def deprecated
-      puts "Zeus 0.11.0 changed zeus.json. You'll have to rm zeus.json && zeus init."
+      puts "Zooms 0.11.0 changed zooms.json. You'll have to rm zooms.json && zooms init."
     end
     alias_method :spec_helper, :deprecated
     alias_method :testrb,      :deprecated
@@ -45,8 +45,8 @@ module Zeus
             rubyopt = ENV['RUBYOPT']
             ENV['RAILS_ENV'] = nil
             ENV['RUBYOPT'] = nil # bundler sets this to require bundler :|
-            puts "zeus test #{file_list_string}"
-            ret = system "zeus test #{file_list_string}"
+            puts "zooms test #{file_list_string}"
+            ret = system "zooms test #{file_list_string}"
             ENV['RAILS_ENV'] = rails_env
             ENV['RUBYOPT'] = rubyopt
             ret
@@ -185,7 +185,7 @@ module Zeus
       if spec_file?(ARGV) && defined?(RSpec)
         exit RSpec::Core::Runner.run(ARGV)
       else
-        Zeus::M.run(ARGV)
+        Zooms::M.run(ARGV)
       end
     end
 
@@ -247,5 +247,5 @@ module Zeus
   end
 end
 
-Zeus.plan ||= Zeus::Rails.new
+Zooms.plan ||= Zooms::Rails.new
 

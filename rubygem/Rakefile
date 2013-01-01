@@ -30,8 +30,8 @@ end
 
 task :version do
   version = File.read('../VERSION').chomp
-  File.open('lib/zeus/version.rb', 'w') { |f| f.puts <<END
-module Zeus
+  File.open('lib/zooms/version.rb', 'w') { |f| f.puts <<END
+module Zooms
   VERSION = "#{version}"
 end
 END
@@ -50,7 +50,7 @@ task manifest: :version do
 end
 
 task :clean do
-  FileUtils.rm(RUBYGEM_PATH + "lib/zeus/version.rb") rescue nil
+  FileUtils.rm(RUBYGEM_PATH + "lib/zooms/version.rb") rescue nil
   FileUtils.rm_r(RUBYGEM_PATH + "man") rescue nil
   FileUtils.rm_r(RUBYGEM_PATH + "build") rescue nil
 end

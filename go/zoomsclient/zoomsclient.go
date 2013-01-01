@@ -1,4 +1,4 @@
-package zeusclient
+package zoomsclient
 
 import (
 	"net"
@@ -10,14 +10,14 @@ import (
 
 	"github.com/burke/pty"
 	"github.com/burke/ttyutils"
-	"github.com/burke/zeus/go/messages"
-	slog "github.com/burke/zeus/go/shinylog"
-	"github.com/burke/zeus/go/unixsocket"
-	"github.com/burke/zeus/go/zerror"
+	"github.com/exodus23-13/zooms/go/messages"
+	slog "github.com/exodus23-13/zooms/go/shinylog"
+	"github.com/exodus23-13/zooms/go/unixsocket"
+	"github.com/exodus23-13/zooms/go/zerror"
 )
 
 const (
-	zeusSockName = ".zeus.sock"
+	zoomsSockName = ".zooms.sock"
 	sigInt       = 3 // todo: this doesn't seem unicode-friendly...
 	sigQuit      = 28
 	sigTstp      = 26
@@ -32,7 +32,7 @@ var terminatingSignals = []os.Signal{syscall.SIGHUP, syscall.SIGINT, syscall.SIG
 
 func doRun() int {
 	if os.Getenv("RAILS_ENV") != "" {
-		println("Warning: Specifying a Rails environment via RAILS_ENV has no effect for commands run with zeus.")
+		println("Warning: Specifying a Rails environment via RAILS_ENV has no effect for commands run with zooms.")
 	}
 
 	isTerminal := ttyutils.IsTerminal(os.Stdout.Fd())
@@ -63,7 +63,7 @@ func doRun() int {
 	// should this happen if we're running over a pipe? I think maybe not?
 	ttyutils.MirrorWinsize(os.Stdout, master)
 
-	addr, err := net.ResolveUnixAddr("unixgram", zeusSockName)
+	addr, err := net.ResolveUnixAddr("unixgram", zoomsSockName)
 	if err != nil {
 		slog.ErrorString(err.Error() + "\r")
 		return 1

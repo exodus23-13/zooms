@@ -2,8 +2,8 @@ require 'fileutils'
 
 version = File.read('../../VERSION').chomp
 
-File.open('zeusversion.go', 'w') { |f| f.puts <<END
-package zeusversion
+File.open('zoomsversion.go', 'w') { |f| f.puts <<END
+package zoomsversion
 
 const VERSION string = "#{version}"
 END

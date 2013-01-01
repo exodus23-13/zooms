@@ -7,11 +7,11 @@ import (
 	"os"
 	"path"
 
-	"github.com/burke/zeus/go/processtree"
-	"github.com/burke/zeus/go/zerror"
+	"github.com/exodus23-13/zooms/go/processtree"
+	"github.com/exodus23-13/zooms/go/zerror"
 )
 
-const configFile string = "zeus.json"
+const configFile string = "zooms.json"
 
 type config struct {
 	Command string
@@ -67,7 +67,7 @@ func iteratePlan(tree *processtree.ProcessTree, plan map[string]interface{}, par
 func defaultConfigPath() string {
 	binaryPath := os.Args[0]
 	gemDir := path.Dir(path.Dir(binaryPath))
-	jsonpath := path.Join(gemDir, "examples/zeus.json")
+	jsonpath := path.Join(gemDir, "examples/zooms.json")
 	return jsonpath
 }
 

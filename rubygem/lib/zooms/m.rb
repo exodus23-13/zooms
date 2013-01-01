@@ -3,8 +3,8 @@
 # we need to load all dependencies up front, because bundler will
 # remove us from the load path soon.
 require "rubygems"
-require "zeus/m/test_collection"
-require "zeus/m/test_method"
+require "zooms/m/test_collection"
+require "zooms/m/test_method"
 
 # the Gemfile may specify a version of method_source, but we also want to require it here.
 # To avoid possible "you've activated X; gemfile specifies Y" errors, we actually scan
@@ -19,7 +19,7 @@ end
 
 require 'method_source'
 
-module Zeus
+module Zooms
   #`m`  stands for metal, which is a better test/unit test runner that can run
   #tests by line number.
   #
@@ -248,7 +248,7 @@ module Zeus
         # For every test ordered by line number,
         # spit out the test name and line number where it starts,
         tests.by_line_number do |test|
-          message << "#{sprintf("%0#{tests.column_size}s", test.name)}: zeus test #{@files[0]}:#{test.start_line}\n"
+          message << "#{sprintf("%0#{tests.column_size}s", test.name)}: zooms test #{@files[0]}:#{test.start_line}\n"
         end
 
         # fail like a good unix process should.
